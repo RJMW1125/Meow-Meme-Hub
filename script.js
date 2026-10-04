@@ -3,7 +3,7 @@ const memeData = {
     popcat: {
         name: "Pop Cat",
         tag: "開心",
-        img: "images/pop-cat.gif",
+        img: "images/pop-cat.jpg",
         desc: "這隻貓叫 Oatmeal,被網友搭配 POP 音效製作成病毒式傳播的影片。",
         origin: "Twitter / 日本",
         year: "2020"
@@ -11,7 +11,7 @@ const memeData = {
     cryingcat: {
         name: "Crying Cat",
         tag: "難過",
-        img: "images/crying-cat.gif",
+        img: "images/crying-cat.jpg",
         desc: "眼睛帶淚的貓咪圖片系列。這些圖片常被用來表達悲傷、失望或假裝傷心的情緒。",
         origin: "4chan / Reddit",
         year: "2014"
@@ -19,7 +19,7 @@ const memeData = {
     huhcat: {
         name: "Huh? Cat",
         tag: "開心",
-        img: "images/huh-cat.gif",
+        img: "images/huh-cat.jpg",
         desc: "歪頭疑惑的表情適用於表達「蛤?」或 Code 不知道為什麼跑不動的時候。",
         origin: "TikTok / Twitter",
         year: "2023"
@@ -35,7 +35,7 @@ const memeData = {
     sleepycat: {
         name: "Sleepy Cat (瞌睡貓)",
         tag: "疲累",
-        img: "images/sleepy-cat.gif",
+        img: "images/sleepy-cat.jpg",
         desc: "這隻小貓咪努力想保持清醒但失敗了。完全代表週一早晨或是剛吃飽飯的你。",
         origin: "Viral Video",
         year: "2019"
@@ -43,7 +43,7 @@ const memeData = {
     happyjump: {
         name: "Happy Cat (跳舞貓)",
         tag: "開心",
-        img: "images/happy-cat.gif",
+        img: "images/happy-cat.jpg",
         desc: "伴隨著 \"Happy Happy Happy\" 兒歌蹦蹦跳跳的貓。用於發生好事、放假!",
         origin: "TikTok Trend",
         year: "2015 (Meme: 2023)"
@@ -59,7 +59,7 @@ const memeData = {
     hugcat: {
         name: "Hug Cat (抱抱貓)",
         tag: "開心",
-        img: "images/hug-cat.gif",
+        img: "images/hug-cat.jpg",
         desc: "撲向鏡頭給你一個大大的擁抱。適合用來安慰朋友或討拍的時候使用。",
         origin: "Cat Gifs",
         year: "Unknown"
