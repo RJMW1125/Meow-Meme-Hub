@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeowMeme Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav role="navigation">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Logo"> MeowMeme Hub
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">首頁</a>
+            <a href="gallery.html" class="nav-item">迷因倉庫</a>
+            <a href="daily.html" class="nav-item active">每日一貓</a>
+            <button class="nav-feedback-btn" onclick="ModalManager.open('myModal')">給予回饋</button>
+        </div>
+    </nav>
+
+    <main class="daily-hero">
+        <div class="card-stage">
+            <div class="card-3d" id="daily-card" onclick="drawDailyCat()">
+                <!-- Back -->
+                <div class="card-side card-back">
+                    <span class="sparkles">✨</span>
+                    <span class="sparkles">⭐</span>
+                    <span class="sparkles">✨</span>
+                    <span class="sparkles">⭐</span>
+                    <div class="mystery-icon">🐱</div>
+                    <p class="tap-text">👆 點擊抽取</p>
+                </div>
+                <!-- Front -->
+                <div class="card-side card-front">
+                    <img id="daily-img" class="cat-image" src="" alt="今日貓貓">
+                    <div class="cat-details">
+                        <h2 id="daily-name" class="cat-name">Loading...</h2>
+                        <div id="daily-luck" class="luck-meter">✨ 運勢計算中...</div>
+                        <p id="daily-desc" class="cat-message"></p>
+                        <div class="card-footer">
+                            <span id="daily-origin" class="origin-tag"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-panel" id="action-panel">
+            <button class="action-btn primary" onclick="resetDailyCard()">🔄 再抽一次</button>
+            <a href="gallery.html" class="action-btn secondary">📂 更多迷因</a>
+            <a href="meme.html" id="meme-lab-link" class="action-btn secondary">🧪 製作梗圖</a>
+        </div>
+    </main>
+
+    <footer>© 2025 MeowMeme Hub. All Paws Reserved. | 國立臺南大學 數位學習科技學系 陳其杰</footer>
+
+    <!-- Feedback Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="ModalManager.close('myModal')">&times;</button>
+            <h2>😼 網站回饋</h2>
+            <form onsubmit="submitFeedback(event)">
+                <textarea id="feedback-textarea" placeholder="在這裡輸入你的建議..." rows="4"
+                    style="width: 100%; margin: 10px 0; padding: 10px; border-radius: 8px; border: 2px solid #ddd;"></textarea>
+                <button type="submit" class="btn-main" style="font-size: 1rem;">送出回饋</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Daily Draw Page Logic
+        let currentMemeId = null;
+
+        function drawDailyCat() {
+            const card = document.getElementById('daily-card');
+            if (card.classList.contains('flipped')) return;
+
+            const keys = Object.keys(memeData);
+            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+            const data = memeData[randomKey];
+            currentMemeId = randomKey;
+
+            document.getElementById('daily-img').src = data.img;
+            document.getElementById('daily-name').innerText = data.name;
+            document.getElementById('daily-desc').innerText = data.desc;
+            document.getElementById('daily-origin').innerText = `📍 ${data.origin} · ${data.year}`;
+            document.getElementById('meme-lab-link').href = 'meme.html?meme=' + randomKey;
+
+            const luckScore = Math.floor(Math.random() * 100) + 1;
+            let luckText = '';
+            if (luckScore >= 80) luckText = '🌟 超級幸運';
+            else if (luckScore >= 60) luckText = '✨ 運勢不錯';
+            else if (luckScore >= 40) luckText = '😺 普通日子';
+            else luckText = '💪 需要加油';
+
+            document.getElementById('daily-luck').innerText = `${luckText} ${luckScore}%`;
+
+            card.classList.add('flipped');
+
+            setTimeout(() => {
+                document.getElementById('action-panel').classList.add('visible');
+            }, 800);
+        }
+
+        function resetDailyCard() {
+            const card = document.getElementById('daily-card');
+            card.classList.remove('flipped');
+            document.getElementById('action-panel').classList.remove('visible');
+        }
+    </script>
+</body>
+
+</html>

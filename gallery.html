@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeowMeme Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav role="navigation">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Logo"> MeowMeme Hub
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">首頁</a>
+            <a href="gallery.html" class="nav-item active">迷因倉庫</a>
+            <a href="daily.html" class="nav-item">每日一貓</a>
+            <button class="nav-feedback-btn" onclick="ModalManager.open('myModal')">給予回饋</button>
+        </div>
+    </nav>
+
+    <main class="container" role="main">
+        <div class="bg-cat c1">🐱</div>
+        <div class="bg-cat c2">😿</div>
+        <div class="bg-cat c3">😹</div>
+        <header>
+            <h1 class="page-title">選擇你的迷因</h1>
+        </header>
+
+        <div class="filter-bar" role="toolbar" aria-label="迷因分類篩選">
+            <button class="filter-btn active" onclick="filterSelection('all', this)" aria-pressed="true"
+                aria-label="顯示全部迷因">
+                全部 (All)
+            </button>
+            <button class="filter-btn" onclick="filterSelection('happy', this)" aria-pressed="false"
+                aria-label="顯示開心的迷因">
+                開心 (Happy)
+            </button>
+            <button class="filter-btn" onclick="filterSelection('sad', this)" aria-pressed="false" aria-label="顯示難過的迷因">
+                難過 (Sad)
+            </button>
+            <button class="filter-btn" onclick="filterSelection('tired', this)" aria-pressed="false"
+                aria-label="顯示疲累的迷因">
+                疲累 (Tired)
+            </button>
+        </div>
+
+        <section class="gallery-grid" role="list" aria-label="迷因圖庫">
+            <article class="card-link happy" onclick="showMemeDetail('popcat')" role="listitem">
+                <div class="card">
+                    <img src="images/pop-cat.gif" alt="Pop Cat 迷因圖片" loading="lazy">
+                    <div class="card-info">
+                        <h3>Pop Cat</h3>
+                        <span class="tag">Happy</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card-link sad" onclick="showMemeDetail('cryingcat')" role="listitem">
+                <div class="card">
+                    <img src="images/crying-cat.gif" alt="Crying Cat 迷因圖片" loading="lazy">
+                    <div class="card-info">
+                        <h3>Crying Cat</h3>
+                        <span class="tag">Sad</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card-link happy" onclick="showMemeDetail('huhcat')" role="listitem">
+                <div class="card">
+                    <img src="images/huh-cat.gif" alt="Huh Cat 迷因圖片" loading="lazy">
+                    <div class="card-info">
+                        <h3>Huh? Cat</h3>
+                        <span class="tag">Happy</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card-link sad" onclick="showMemeDetail('thumbsup')" role="listitem">
+                <div class="card">
+                    <img src="images/thumbs-up.jpg" alt="Thumbs Up 迷因圖片" loading="lazy">
+                    <div class="card-info">
+                        <h3>Thumbs Up</h3>
+                        <span class="tag">Sad</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card-link tired" onclick="showMemeDetail('sleepycat')" role="listitem">
+                <div class="card">
+                    <img src="images/sleepy-cat.gif" alt="Sleepy Cat 迷因圖片" loading="lazy">
+                    <div class="card-info">
+                        <h3>Sleepy Cat</h3>
+                        <span class="tag">Tired</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card-link happy" onclick="showMemeDetail('happyjump')" role="listitem">
+                <div class="card">
+                    <img src="images/happy-cat.gif" alt="Happy Cat 迷因圖片" loading="lazy">
+                    <div class="card-info">
+                        <h3>Happy Cat</h3>
+                        <span class="tag">Happy</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card-link sad" onclick="showMemeDetail('lavacat')" role="listitem">
+                <div class="card">
+                    <img src="images/lava-cat.gif" alt="Lava Cat 迷因圖片" loading="lazy">
+                    <div class="card-info">
+                        <h3>Lava Cat</h3>
+                        <span class="tag">Sad</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card-link happy" onclick="showMemeDetail('hugcat')" role="listitem">
+                <div class="card">
+                    <img src="images/hug-cat.gif" alt="Hug Cat 迷因圖片" loading="lazy">
+                    <div class="card-info">
+                        <h3>Hug Cat</h3>
+                        <span class="tag">Happy</span>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <div class="coming-soon">
+            <p>MORE CAT MEMES COMING SOON 🐱</p>
+        </div>
+    </main>
+
+    <div id="memeDetailModal" class="modal" role="dialog" aria-labelledby="memeDetailTitle" aria-modal="true"
+        aria-hidden="true">
+        <div class="modal-content meme-detail-content">
+            <button class="close-btn" onclick="ModalManager.close('memeDetailModal')" aria-label="關閉視窗">&times;</button>
+            <div class="meme-detail-wrapper">
+                <img id="memeDetailImg" src="" alt="迷因詳細圖片" class="meme-detail-img">
+                <div class="meme-detail-info">
+                    <h2 id="memeDetailTitle"></h2>
+                    <span id="memeDetailTag" class="tag"></span>
+                    <p id="memeDetailDesc" class="meme-detail-desc"></p>
+                    <div class="meme-detail-meta">
+                        <p><strong>🌍 起源：</strong><span id="memeDetailOrigin"></span></p>
+                        <p><strong>📅 流行年份：</strong><span id="memeDetailYear"></span></p>
+                    </div>
+                    <a id="memeDetailLink" href="#" target="_blank" rel="noopener noreferrer" class="external-btn">🔗
+                        搜尋更多來源</a>
+                    <a id="memeLabLink" href="meme.html" class="btn-lab">🧪 前往實驗室製作</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>© 2025 MeowMeme Hub. All Paws Reserved. | 國立臺南大學 數位學習科技學系 陳其杰</footer>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="ModalManager.close('myModal')">&times;</button>
+            <h2>😼 網站回饋</h2>
+            <form onsubmit="submitFeedback(event)">
+                <textarea id="feedback-textarea" placeholder="在這裡輸入你的建議..." rows="4"
+                    style="width: 100%; margin: 10px 0; padding: 5px;"></textarea>
+                <button type="submit" class="btn-main" style="font-size: 1rem;">送出回饋</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

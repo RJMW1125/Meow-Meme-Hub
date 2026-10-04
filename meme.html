@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeowMeme Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav role="navigation">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Logo"> MeowMeme Hub
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">首頁</a>
+            <a href="gallery.html" class="nav-item active">迷因倉庫</a>
+            <a href="daily.html" class="nav-item">每日一貓</a>
+            <button class="nav-feedback-btn" onclick="ModalManager.open('myModal')">給予回饋</button>
+        </div>
+    </nav>
+
+    <main class="container flex-container" role="main">
+        <section class="image-area" aria-label="迷因預覽區">
+            <div class="img-wrapper">
+                <img id="lab-meme-img" src="images/HUH CAT.gif" class="meme-target" alt="當前選擇的迷因圖片" loading="eager">
+                <div id="meme-text-overlay" aria-live="polite">TEXT HERE</div>
+            </div>
+        </section>
+
+        <section class="controls-area" aria-label="迷因編輯控制區">
+            <h1 id="lab-meme-name">Huh? Cat</h1>
+            <p id="lab-meme-desc" class="desc">這是一隻困惑的貓。適合用於表達「蛤？」、「聽不懂」或 Code 跑不動的時候。</p>
+
+            <div class="input-group">
+                <label for="meme-input">輸入文字製作迷因：</label>
+                <input type="text" id="meme-input" placeholder="在這裡打字..." oninput="updateMemeText()"
+                    aria-describedby="meme-input-help">
+                <small id="meme-input-help" class="sr-only">輸入的文字會即時顯示在圖片上</small>
+            </div>
+
+            <div class="interaction-box">
+                <button class="like-btn" onclick="MemeLab.addLike()" aria-label="為這個迷因按讚">
+                    ❤️ <span id="like-count">0</span> Likes
+                </button>
+                <button class="download-btn" onclick="MemeLab.downloadMeme()" aria-label="下載迷因圖片">
+                    下載圖片
+                </button>
+            </div>
+
+            <br>
+
+            <button id="lab-source-btn" class="external-btn" onclick="openSourceLink()" aria-label="在新視窗開啟原始貼文">
+                前往查看原始貼文
+            </button>
+        </section>
+    </main>
+
+    <section class="container video-section" aria-label="更多貓咪迷因影片">
+        <h2>🎥 更多貓咪迷因影片</h2>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/asYwVDWhAYc" title="更多貓咪迷因影片"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <footer>© 2025 MeowMeme Hub. All Paws Reserved. | 國立臺南大學 數位學習科技學系 陳其杰</footer>
+
+    <div id="myModal" class="modal" role="dialog" aria-labelledby="feedbackTitle" aria-modal="true" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-btn" onclick="ModalManager.close('myModal')" aria-label="關閉回饋表單">&times;</button>
+            <h2 id="feedbackTitle">😼 網站回饋</h2>
+            <p>這隻貓可愛嗎?請告訴我們你的想法!</p>
+            <form onsubmit="submitFeedback(event)">
+                <label for="feedback-textarea" class="sr-only">回饋內容</label>
+                <textarea id="feedback-textarea" placeholder="在這裡輸入你的建議..." rows="4"
+                    style="width: 100%; margin: 10px 0; padding: 5px;" aria-required="true"></textarea>
+                <button type="submit" class="btn-main" style="font-size: 1rem;">送出回饋</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

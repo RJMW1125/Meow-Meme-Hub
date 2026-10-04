@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeowMeme Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav role="navigation">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Logo"> MeowMeme Hub
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-item active">首頁</a>
+            <a href="gallery.html" class="nav-item">迷因倉庫</a>
+            <a href="daily.html" class="nav-item">每日一貓</a>
+            <button class="nav-feedback-btn" onclick="ModalManager.open('myModal')">給予回饋</button>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="bg-cat c1">🐱</div>
+        <div class="bg-cat c2">😿</div>
+        <div class="bg-cat c3">😹</div>
+
+        <h1 class="neon-text">Meow<br>Meme<br>Hub</h1>
+        <p class="tagline">⚠️ 警告: 可愛爆擊</p>
+
+        <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+            <a href="gallery.html" class="btn-main">🚀 開始吸貓</a>
+            <a href="daily.html" class="btn-main" style="background: #9370DB;">🔮 今日運勢</a>
+        </div>
+    </main>
+
+    <footer>© 2025 MeowMeme Hub. All Paws Reserved. | 國立臺南大學 數位學習科技學系 陳其杰</footer>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="ModalManager.close('myModal')">&times;</button>
+            <h2>😼 網站回饋</h2>
+            <form onsubmit="submitFeedback(event)">
+                <textarea id="feedback-textarea" placeholder="在這裡輸入你的建議..." rows="4"
+                    style="width: 100%; margin: 10px 0; padding: 5px;"></textarea>
+                <button type="submit" class="btn-main" style="font-size: 1rem;">送出回饋</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
