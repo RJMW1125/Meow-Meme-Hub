@@ -258,7 +258,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (desc) desc.innerText = meme.desc;
     }
     MemeLab.loadLikes();
-
+    
+// Image error handling
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', function () {
+        this.style.display = 'none';
+        const placeholder = document.createElement('div');
+        placeholder.className = 'img-placeholder';
+        placeholder.innerHTML = '🐱<br><small>Image failed</small>';
+        this.parentNode.insertBefore(placeholder, this);
+    });
+});
+    
 // Click outside modal to close
 window.addEventListener('click', function (event) {
     if (event.target.classList.contains('modal')) {
