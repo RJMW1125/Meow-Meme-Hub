@@ -243,8 +243,41 @@ function submitFeedback(event) {
     }
 }
 
+// Keep one fallback per image and restore it after a later successful load.
+function installImageFallback(img) {
+    let placeholder = null;
+
+    function showFallback() {
+        // Dynamic images have no source until a card is selected or drawn.
+        // Ignore an old error if a newer source is still loading or succeeded.
+        if (!img.getAttribute('src') || !img.complete || img.naturalWidth > 0) return;
+        img.classList.add('image-load-failed');
+        if (!placeholder) {
+            placeholder = document.createElement('div');
+            placeholder.className = 'img-placeholder';
+            placeholder.setAttribute('role', 'status');
+            placeholder.textContent = '🐱 圖片載入失敗，請稍後再試';
+            img.before(placeholder);
+        }
+    }
+
+    img.addEventListener('error', showFallback);
+    img.addEventListener('load', function () {
+        img.classList.remove('image-load-failed');
+        if (placeholder) {
+            placeholder.remove();
+            placeholder = null;
+        }
+    });
+
+    // An image may have failed before this external script finished loading.
+    showFallback();
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('img').forEach(installImageFallback);
+
     // Meme Lab page initialization
     const urlParams = new URLSearchParams(window.location.search);
     const memeId = urlParams.get('meme');
@@ -258,18 +291,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (desc) desc.innerText = meme.desc;
     }
     MemeLab.loadLikes();
-    
-// Image error handling
-document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('error', function () {
-        this.style.display = 'none';
-        const placeholder = document.createElement('div');
-        placeholder.className = 'img-placeholder';
-        placeholder.innerHTML = '🐱<br><small>Image failed</small>';
-        this.parentNode.insertBefore(placeholder, this);
-    });
 });
-    
+
 // Click outside modal to close
 window.addEventListener('click', function (event) {
     if (event.target.classList.contains('modal')) {
